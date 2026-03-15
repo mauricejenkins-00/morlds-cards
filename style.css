@@ -1,0 +1,479 @@
+:root {
+  --void: #06060c;
+  --void-light: #0e0e16;
+  --void-border: #1a1a26;
+  --accent: #00d4aa;
+  --accent-dim: rgba(0, 212, 170, 0.45);
+  --accent-glow: rgba(0, 212, 170, 0.2);
+  --cyan: #00b4d8;
+  --mauve: #c9a0dc;
+  --amber: #ffb74d;
+  --text: #e8e6e3;
+  --text-muted: #7a7685;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: "Syne", system-ui, sans-serif;
+  background: var(--void);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1000;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 25% 15%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 55% 70%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(2px 2px at 85% 55%, rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 92% 88%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 18% 85%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 60% 12%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.5px 1.5px at 35% 92%, rgba(255,255,255,0.45), transparent);
+  pointer-events: none;
+  z-index: 0;
+  animation: stars-twinkle 8s ease-in-out infinite;
+}
+
+@keyframes stars-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Header */
+.solar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.875rem 1.5rem;
+  background: rgba(6, 6, 12, 0.85);
+  border-bottom: 1px solid var(--void-border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.solar-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.solar-tagline {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Solar system container */
+.solar-main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 5rem 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solar-system {
+  position: relative;
+  width: min(90vmin, 520px);
+  height: min(90vmin, 520px);
+  margin: 0 auto;
+}
+
+/* Core (sun) */
+.solar-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 220, 150, 0.95),
+    rgba(255, 160, 60, 0.8) 40%,
+    rgba(200, 100, 20, 0.6) 70%,
+    rgba(80, 40, 0, 0.4)
+  );
+  box-shadow:
+    0 0 30px rgba(255, 180, 80, 0.7),
+    0 0 60px rgba(255, 140, 40, 0.4),
+    0 0 100px rgba(255, 120, 0, 0.2);
+  animation: core-pulse 4s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+}
+
+/* Orbit rings */
+.orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbit-1 {
+  width: 100%;
+  height: 100%;
+  margin: -50% 0 0 -50%;
+}
+
+.orbit-2 {
+  width: 76%;
+  height: 76%;
+  margin: -38% 0 0 -38%;
+}
+
+/* Morld orbs container – orbit tracks rotate around the sun */
+.morld-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.morld-orbs > * {
+  pointer-events: auto;
+}
+
+.orbit-track {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  animation: orbit-rotate var(--orbit-duration, 24s) linear infinite;
+}
+
+.orbit-track:nth-child(1) { --orbit-duration: 28s; }
+.orbit-track:nth-child(2) { --orbit-duration: 22s; animation-direction: reverse; }
+.orbit-track:nth-child(3) { --orbit-duration: 26s; }
+.orbit-track:nth-child(4) { --orbit-duration: 20s; animation-direction: reverse; }
+
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.morld-orb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  transform: translate(var(--tx, 0), var(--ty, 0)) translate(-50%, -50%);
+}
+
+.morld-orb::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.morld-orb:hover,
+.morld-orb:focus-visible {
+  transform: translate(var(--tx, 0), var(--ty, 0)) translate(-50%, -50%) scale(1.15);
+  outline: none;
+}
+
+.morld-orb:hover::before,
+.morld-orb:focus-visible::before {
+  opacity: 1;
+}
+
+.morld-orb.selected {
+  transform: translate(var(--tx, 0), var(--ty, 0)) translate(-50%, -50%) scale(1.1);
+  box-shadow:
+    0 0 0 2px var(--accent-dim),
+    0 0 24px var(--accent-glow);
+}
+
+.morld-orb-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.morld-orb-inner--void {
+  background: radial-gradient(
+    circle at 35% 25%,
+    rgba(255, 220, 180, 0.9),
+    rgba(255, 160, 80, 0.6) 45%,
+    rgba(180, 100, 40, 0.4) 75%,
+    rgba(80, 40, 20, 0.3)
+  );
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(255, 160, 80, 0.35),
+    inset 0 0 20px rgba(255, 255, 255, 0.06);
+}
+
+.morld-orb-inner--pisces {
+  background: radial-gradient(
+    circle at 35% 25%,
+    rgba(180, 230, 255, 0.95),
+    rgba(100, 200, 255, 0.7) 45%,
+    rgba(60, 160, 220, 0.5) 75%,
+    rgba(30, 80, 120, 0.35)
+  );
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(100, 200, 255, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+.morld-orb-label {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.morld-orb:hover .morld-orb-label,
+.morld-orb:focus-visible .morld-orb-label,
+.morld-orb.selected .morld-orb-label {
+  opacity: 1;
+  color: var(--text);
+}
+
+/* Orb accent colors */
+.morld-orb[data-accent="void"] .morld-orb-inner { box-shadow: 0 0 16px rgba(201, 160, 220, 0.35); }
+.morld-orb[data-accent="void"]::before { box-shadow: 0 0 30px rgba(201, 160, 220, 0.25); }
+
+.morld-orb[data-accent="pisces"] .morld-orb-inner { box-shadow: 0 0 16px rgba(0, 180, 216, 0.35); }
+.morld-orb[data-accent="pisces"]::before { box-shadow: 0 0 30px rgba(0, 180, 216, 0.25); }
+
+.solar-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 2rem;
+}
+
+/* Details panel */
+.details-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  z-index: 200;
+  background: var(--void-light);
+  border-left: 1px solid var(--void-border);
+  transform: translateX(100%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-panel.open {
+  transform: translateX(0);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.details-panel-inner {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.details-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--void-border);
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  z-index: 3;
+}
+
+.details-close:hover {
+  color: var(--text);
+  background: var(--text-muted);
+}
+
+.details-content {
+  padding-top: 0.5rem;
+}
+
+.details-preview-wrap {
+  width: 100%;
+  min-width: 300px;
+  height: 420px;
+  background: var(--void);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--void-border);
+}
+
+.details-preview-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.details-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.details-mood {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.details-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.details-meta-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.details-meta-label {
+  color: var(--text-muted);
+  min-width: 80px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+}
+
+.details-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.details-tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  padding: 0.25em 0.5em;
+  background: var(--void-border);
+  color: var(--text-muted);
+  border-radius: 4px;
+}
+
+.details-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent);
+  color: var(--void);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.details-enter-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+@media (max-width: 640px) {
+  .details-panel {
+    max-width: 100%;
+  }
+
+  .solar-system {
+    width: 85vmin;
+    height: 85vmin;
+  }
+
+  .morld-orb {
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+  }
+}
