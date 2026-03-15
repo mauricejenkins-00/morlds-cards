@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <title>Morlds – Void World</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="space-bg">
+    <div class="space-layer space-layer--near"></div>
+    <div class="space-layer space-layer--far"></div>
+  </div>
+
+  <div class="app-shell">
+    <div class="top-bar">
+      <div>
+        <div class="title">Morlds</div>
+        <div class="subtitle">Digital worlds</div>
+      </div>
+      <div id="morldUri">void://001</div>
+    </div>
+
+    <main class="content">
+      <!-- Centered void world -->
+      <section class="world-container">
+        <div class="figure-card">
+          <div class="figure-card-inner">
+            <div class="card-nft-badge">NFT</div>
+            <div class="world-figure">
+              <img
+                src="../../.cursor/projects/c-Users-Manny-Desktop-Morlds/assets/c__Users_Manny_AppData_Roaming_Cursor_User_workspaceStorage_db227c74622cc68b470b5719bce8f634_images_divine_works_1-2730d2b0-50fd-4175-a3b6-283d2717f052.png"
+                alt="Illuminated manuscript style cosmos and human figure"
+              />
+            </div>
+            <div class="world-orbit-wrapper">
+              <div class="world-orbit" id="worldOrbit">
+                <div class="world-core" id="worldCore">
+                  <div class="element-layer element-layer--inner-core"></div>
+                  <div class="element-layer element-layer--outer-core"></div>
+                  <div class="element-layer element-layer--mantle"></div>
+                  <div class="element-layer element-layer--crust"></div>
+                  <div class="element-layer element-layer--oceans"></div>
+                  <div class="element-layer element-layer--atmosphere"></div>
+                </div>
+                <div class="world-label" id="worldLabel">Morld: Origin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" id="downloadCardBtn">Save PNG</button>
+          <button type="button" id="nftModeBtn">Create NFT</button>
+        </div>
+        <div class="nft-mint-link" id="nftMintLink"></div>
+
+        <div class="world-controls">
+          <button id="zoomOutBtn">−</button>
+          <span>Zoom</span>
+          <button id="zoomInBtn">+</button>
+        </div>
+        <div class="hint">
+          Drag to spin. Pinch / scroll or buttons to zoom.
+        </div>
+        <div class="layer-annotations">
+          <div class="layer-annotation-row layer-annotation-row--inner-core">
+            <span class="layer-annotation-label">Inner core</span>
+            <span class="layer-annotation-desc">Solid iron–nickel heart</span>
+          </div>
+          <div class="layer-annotation-row layer-annotation-row--outer-core">
+            <span class="layer-annotation-label">Outer core</span>
+            <span class="layer-annotation-desc">Molten metal, dynamo of the field</span>
+          </div>
+          <div class="layer-annotation-row layer-annotation-row--mantle">
+            <span class="layer-annotation-label">Mantle</span>
+            <span class="layer-annotation-desc">Slowly convecting stone</span>
+          </div>
+          <div class="layer-annotation-row layer-annotation-row--crust">
+            <span class="layer-annotation-label">Crust</span>
+            <span class="layer-annotation-desc">Thin, fractured shell</span>
+          </div>
+          <div class="layer-annotation-row layer-annotation-row--oceans">
+            <span class="layer-annotation-label">Oceans</span>
+            <span class="layer-annotation-desc">Mobile hydrosphere skin</span>
+          </div>
+          <div class="layer-annotation-row layer-annotation-row--atmosphere">
+            <span class="layer-annotation-label">Atmosphere</span>
+            <span class="layer-annotation-desc">Thin luminous veil</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Metadata + simple controls -->
+      <section class="panel">
+        <div class="panel-header">
+          <span>Active Morld</span>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-label">ID</div>
+          <div class="meta-value" id="metaId"></div>
+
+          <div class="meta-label">Name</div>
+          <div class="meta-value" id="metaName"></div>
+
+          <div class="meta-label">Struct</div>
+          <div class="meta-value" id="metaMood"></div>
+
+          <div class="meta-label">Seed</div>
+          <div class="meta-value" id="metaSeed"></div>
+
+          <div class="meta-label">Planet</div>
+          <div class="meta-value" id="metaPlanet"></div>
+
+          <div class="meta-label">Background</div>
+          <div class="meta-value" id="metaBackground"></div>
+
+          <div class="meta-label">Tags</div>
+          <div class="meta-value" id="metaTags"></div>
+        </div>
+
+        <div class="tag-input-row">
+          <input
+            id="newTagInput"
+            type="text"
+            placeholder="Add tag (press +)"
+            maxlength="18"
+          />
+          <button id="addTagBtn">+ Tag</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
