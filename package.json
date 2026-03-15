@@ -1,9 +1,0 @@
-{
-  "name": "morlds-marketplace",
-  "version": "1.0.0",
-  "description": "Marketplace for Morlds - generative planetary experiences",
-  "scripts": {
-    "start": "npx serve .",
-    "serve": "npx serve ."
-  }
-}
